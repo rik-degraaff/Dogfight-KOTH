@@ -1,0 +1,14 @@
+package Planes;
+
+//This is the base class players extends.
+//It contains the arena size and 4 plane objects representing the planes in the arena.
+public class PlaneControl {
+ 
+	protected Plane[] Planes = new Plane[4];
+	protected int arenaSize;
+	protected int roundsLeft;
+ 
+	public PlaneControl(int arenaSize) {
+		this.arenaSize = arenaSize;
+	}
+}
