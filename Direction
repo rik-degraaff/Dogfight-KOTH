@@ -1,67 +1,69 @@
 package Planes;
 
-//A helper class for working with directions. 
+// A helper class for working with directions. 
 public class Direction {
-	// Returns true if a direction is valid.
-	public static boolean isValid(String direction)
-	{
-		if (direction.length() == 3) {
-			return (direction.charAt(0) == 'N' || direction.charAt(0) == 'S') &&
-					(direction.charAt(1) == 'W' || direction.charAt(1) == 'E') &&
-					(direction.charAt(2) == 'D' || direction.charAt(2) == 'U');
-					
-		} else if (direction.length() == 2) {
-			return ((direction.charAt(0) == 'N' || direction.charAt(0) == 'S') &&
-						(direction.charAt(1) == 'W' || direction.charAt(1) == 'E' || direction.charAt(1) == 'D' || direction.charAt(1) == 'U')) ||
-					((direction.charAt(0) == 'W' || direction.charAt(0) == 'E') && (direction.charAt(1) == 'D' || direction.charAt(1) == 'U')); 
+	// The three main directions, -1 means the first letter is in the direction, 1 means the second is, 0 means neither is.
+	private int NS, WE, DU;
+	
+	// Creates a direction from 3 integers.
+	public Direction(int NSDir, int WEDir, int DUDir) {
+		NS = (NSDir>0)?1:(NSDir==0)?0:-1;
+		WE = (WEDir>0)?1:(WEDir==0)?0:-1;
+		DU = (DUDir>0)?1:(DUDir==0)?0:-1;
+	}
+	
+	// Creates a direction from a directionstring.
+	public Direction(String direction) {
+		NS = (direction.indexOf("N")>-1)?-1:(direction.indexOf("S")>-1)?1:0;
+		WE = (direction.indexOf("W")>-1)?-1:(direction.indexOf("E")>-1)?1:0;
+		DU = (direction.indexOf("D")>-1)?-1:(direction.indexOf("S")>-1)?1:0;
+	}
+	
+	// Returns The direction projected onto the NS-axis.
+	// -1 means heading north.
+	public int getNSDir() {
+		return NS;
+	}
+
+	// Returns The direction projected onto the WE-axis.
+	// -1 means heading west.
+	public int getWEDir() {
+		return WE;
+	}
+	
+	// Returns The direction projected onto the DU-axis.
+	// -1 means heading down.
+	public int getDUDir() {
+		return DU;
+	}
+	
+	// Returns a Point3D representing the direction.
+	public Point3D getAsPoint3D() {
+		return new Point3D(NS, WE, DU);
+	}
+	
+	// Returns all possible turning directions.
+	public Direction[] getPossibleDirections() {
+		Direction[] directions;
+		if (Math.abs(NS) + Math.abs(NS) + Math.abs(NS) < 3) {
+			directions = new Direction[9];
 		} else {
-			return direction.charAt(0) == 'N' || direction.charAt(0) == 'S' ||
-					direction.charAt(0) == 'W' || direction.charAt(0) == 'E' ||
-					direction.charAt(0) == 'D' || direction.charAt(0) == 'U'; 
+			directions = new Direction[7];
 		}
-	}
-	// Converts a direction into an array of chars representing the primary directions it consists of.
-	public static char[] getPrimaryDirections(String direction) {
-		if (direction.length() == 3) {
-			char[] primaryDirections = {direction.charAt(0), direction.charAt(1), direction.charAt(2)};
-			return primaryDirections;
-		} else if (direction.length() == 2) {
-			char[] primaryDirections = {direction.charAt(0), direction.charAt(1)};
-			return primaryDirections;
-		} else {
-			char[] primaryDirections = {direction.charAt(0)};
-			return primaryDirections;
+		int directionCount = 0;
+		
+		for (int tempNS = -1; tempNS<=1; tempNS++) {
+			for (int tempWE = -1; tempNS<=1; tempNS++) {
+				for (int tempDU = -1; tempNS<=1; tempNS++) {
+					if (((tempNS - NS)*(tempNS - NS) + (tempWE - WE)*(tempWE - WE) + (tempDU - DU)*(tempDU - DU)) < 3 &&
+						((tempNS != 0 && tempNS == NS) || (tempWE != 0 && tempWE == WE) || (tempWE != 0 && tempWE == WE))) {
+						directions[directionCount] = new Direction(tempNS, tempWE, tempDU);
+						directionCount++;
+					}
+				}
+			}
 		}
-	     
-	}
-	 
-	// Converts an array of up to 3 chars representing a  direction into a valid direction.
-	// Not done yet.
-	public static String getDirection(char[] primaryDirections) {
-		return null;
-	     
-	}
-	 
-	// Returns all possible turning directions given an initial direction.
-	// Not done Yet.
-	public static String[] getPossibleDirectionsFromDirection(String direction) {
-	    if (direction.length() == 3) {
-	        String[] directions = {direction,   // the direction itself
-								                
-								    Character.toString(direction.charAt(0)),	// diagonally connected directions 
-								    Character.toString(direction.charAt(1)), 
-								    Character.toString(direction.charAt(2)),
-								                
-								    Character.toString(direction.charAt(0)) + Character.toString(direction.charAt(1)),	// directly connected directions
-								    Character.toString(direction.charAt(0)) + Character.toString(direction.charAt(2)),
-								    Character.toString(direction.charAt(1)) + Character.toString(direction.charAt(2))}; 
-	    	return directions;
-	                 
-	    } else if (direction.length() == 2) {
-	         
-	    } else if ( direction. length () == 1) {
-	         
-	    }
-	    return null;       
+		
+		return directions;
 	}  
 }
