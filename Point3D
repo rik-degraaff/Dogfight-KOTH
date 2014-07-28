@@ -8,4 +8,19 @@ public class Point3D {
 		this.y = y;
 		this.z = z;
 	}
+	
+	// Returns the sum of this Point3D and the one specified in the argument.
+	public Point3D add(Point3D point3D) {
+		return new Point3D(x + point3D.x, y + point3D.y, z + point3D.z);
+	}
+	
+	// Returns the product of this Point3D and a factor.
+	public Point3D multiply(int factor) {
+		return new Point3D(factor*x, factor*y, factor*z);
+	}
+	
+	// Returns true if both Point3D are the same.
+	public boolean equals(Point3D point3D) {
+		return x == point3D.x && y == point3D.y && z == point3D.z;
+	}
 }
