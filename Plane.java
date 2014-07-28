@@ -4,7 +4,7 @@ package Planes;
 //as well as some helper functions.
 public class Plane {
 	private int x, y, z;
-	private String direction;
+	private Direction direction;
 	private int arenaSize;
 	private boolean alive = true;
 	private int coolDown = 0;
@@ -55,7 +55,7 @@ public class Plane {
 	}
 	 
 	// Returns the direction of the plane.
-	public String getDirection() {
+	public Direction getDirection() {
 	    if (alive) {
 	        return direction;
 	    } else {
@@ -64,9 +64,9 @@ public class Plane {
 	}
 	 
 	// Returns all possible turning directions for the plane.
-	public String[] getPossibleDirections() {
+	public Direction[] getPossibleDirections() {
 	    if (alive) {
-	        return Direction.getPossibleDirectionsFromDirection(direction);
+	        return direction.getPossibleDirections();
 	    } else {
 	        return null;
 	    }        
@@ -100,7 +100,7 @@ public class Plane {
 	// Returns a plane that represents this plane after making a certain move,
 	// not taking into account other planes.
 	// Not done yet.
-	public Plane simulateMove() {
+	public Plane simulateMove(Move move) {
 	return null;
 	     
 	} 
