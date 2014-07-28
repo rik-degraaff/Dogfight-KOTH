@@ -17,11 +17,8 @@ public class Plane {
 	}
 	 
 	public Plane(int arenaSize, Direction direction, Point3D position) {
-		this.arenaSize = arenaSize;
-		this.position = new Point3D(position.x, position.y, position.z);
-		alive = position.isInArena(arenaSize);
-		this.direction = direction;
-	}    
+		Plane(arenaSize, direction, position.x, position.y, position.z);
+	}
  
 	// Returns the x coordinate of the plane
 	public int getX() {
