@@ -1,11 +1,13 @@
 package Planes;
 
 public class Move {
-	public boolean changeDirection;
 	public Direction direction;
-	
-	public Move(Direction direction, boolean changeDirection) {
+	public boolean changeDirection;
+	public boolean shoot;
+
+	public Move(Direction direction, boolean changeDirection, boolean shoot) {
 		this.direction = direction;
 		this.changeDirection = changeDirection;
+		this.shoot = shoot;
 	}
 }
