@@ -17,7 +17,7 @@ public class Plane {
 	}
 	 
 	public Plane(int arenaSize, Direction direction, Point3D position) {
-		Plane(arenaSize, direction, position.x, position.y, position.z);
+		this(arenaSize, direction, position.x, position.y, position.z);
 	}
  
 	// Returns the x coordinate of the plane
