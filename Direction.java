@@ -68,7 +68,7 @@ public class Direction {
 	// Returns all possible turning directions.
 	public Direction[] getPossibleDirections() {
 		Direction[] directions;
-		if (Math.abs(NS) + Math.abs(NS) + Math.abs(NS) < 3) {
+		if (Math.abs(NS) + Math.abs(WE) + Math.abs(DU) < 3) {
 			directions = new Direction[9];
 		} else {
 			directions = new Direction[7];
