@@ -96,8 +96,7 @@ public class Controller {
 		for (int i=0; i<planes.length - 1; i++) {
 			for (int j=i+1; j<planes.length; j++) {
 				if (planes[i].getPosition().equals(planes[j].getPosition())) {
-					collided[i] = true;
-					collided[j] = true;
+					collided[i] = collided[j] = true;
 				}
 			}
 		}
