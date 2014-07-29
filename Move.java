@@ -10,4 +10,8 @@ public class Move {
 		this.changeDirection = changeDirection;
 		this.shoot = shoot;
 	}
+	
+	public String getAsString() {
+		return "direction: " + direction.getAsString() + " change: " + Boolean.toString(changeDirection) + " shoot: " + Boolean.toString(shoot);
+	}
 }
