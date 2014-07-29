@@ -23,7 +23,7 @@ public class Point3D {
 	public boolean equals(Point3D point3D) {
 		return x == point3D.x && y == point3D.y && z == point3D.z;
 	}
-	
+
 	// Returns true if Point3D is within a 0-based arena of a specified size.
 	public boolean isInArena(int size) {
 		return Math.min(x, Math.min(y, z))>=0 && Math.max(x, Math.max(y, z))<size;
