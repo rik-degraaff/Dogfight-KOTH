@@ -131,6 +131,7 @@ public class Controller {
 			out.println(player1String + "'s second plane: " + player1Planes[1].getAsString() + eol);
 			out.println(player2String + "'s first plane: " + player2Planes[0].getAsString() + eol);
 			out.println(player2String + "'s second plane: " + player2Planes[1].getAsString() + eol);
+			out.flush();
 			
 			// Tell the players how many rounds are left.
 			player1.setRoundsLeft(i);
