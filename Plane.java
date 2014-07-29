@@ -9,15 +9,16 @@ public class Plane {
 	private boolean alive = true;
 	private int coolDown = 0;
  
-	public Plane(int arenaSize, Direction direction, int x, int y, int z) {
+	public Plane(int arenaSize, int coolDown, Direction direction, int x, int y, int z) {
 		this.arenaSize = arenaSize;
 		this.position = new Point3D(x, y, z);
 		alive = position.isInArena(arenaSize);
 		this.direction = direction;
+		this.coolDown = coolDown;
 	}
-	 
-	public Plane(int arenaSize, Direction direction, Point3D position) {
-		this(arenaSize, direction, position.x, position.y, position.z);
+
+	public Plane(int arenaSize, int coolDown, Direction direction, Point3D position) {
+		this(arenaSize, coolDown, direction, position.x, position.y, position.z);
 	}
  
 	// Returns the x coordinate of the plane
@@ -34,7 +35,7 @@ public class Plane {
 	public int getZ() {
 		return (alive)?position.z:-1;
 	}
-	
+
 	// Returns the position as a Point3D.
 	public Point3D getPosition() {
 		return position;
@@ -89,7 +90,7 @@ public class Plane {
 	public int getCoolDown() {
 	    return coolDown;
 	}
-	
+
 	public void setCoolDown(int coolDown) {
 		this.coolDown = coolDown;
 	}
@@ -102,18 +103,18 @@ public class Plane {
 	// Returns all positions this plane can shoot at (without first making a move).
 	public Point3D[] getShootRange() {		
 		if (alive) {
-			int maxDistance = 0;
-			
+			int maxDistance = 20;
+
 			for (int i=0; i<direction.getMainDirections().length; i++) {
-				maxDistance = Math.max(maxDistance, getDistanceFromWall(direction.getMainDirections()[i]));
+				maxDistance = Math.min(maxDistance, getDistanceFromWall(direction.getMainDirections()[i]));
 			}
-			
+
 			Point3D[] range = new Point3D[maxDistance];
-			
-			for (int i=1; i<maxDistance; i++) {
-				range[i] = position.add(direction.getAsPoint3D().multiply(i));
+
+			for (int i=0; i<maxDistance; i++) {
+				range[i] = position.add(direction.getAsPoint3D().multiply(i+1));
 			}
-			
+
 			return range;
 		} else {
 			return null;
@@ -125,16 +126,16 @@ public class Plane {
 		if (alive) {
 			Direction[] directions = getPossibleDirections();
 			Point3D[] range = new Point3D[directions.length];
-			
+
 			for (int i=0; i<directions.length; i++) {
 				range[i] = position.add(directions[i].getAsPoint3D());
 			}
-			
+
 			return range;
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	// Returns a plane that represents this plane after making a certain move,
@@ -143,36 +144,45 @@ public class Plane {
 		if (!alive) {
 			return copy();
 		}
-		
+
 		Direction newDirection;
-		
+
 		if (!direction.isValidDirection(move.direction)) {
 			move.direction = direction; // If a direction is invalid, you fly straight ahead.
 		}
-		
+
 		if (move.changeDirection) {
 			newDirection = move.direction;
 		} else {
 			newDirection = direction;
 		}
-		
-		return new Plane(arenaSize, newDirection, position.add(move.direction.getAsPoint3D()));
+
+		return new Plane(arenaSize, Math.max(0, coolDown - 1), newDirection, position.add(move.direction.getAsPoint3D()));
 	}
-	
+
 	// Returns true if the plane is alive.
 	public boolean isAlive() {
 		return alive;
 	}
-	
+
 	// Sets alive to the specified value.
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
-	
-	// returns a copy of itself.
+
+	// Returns a copy of itself.
 	public Plane copy() {
-		Plane copyPlane = new Plane(arenaSize, new Direction(direction.getNSDir(), direction.getWEDir(), direction.getDUDir()), new Point3D(position.x, position.y, position.z));
+		Plane copyPlane = new Plane(arenaSize, coolDown, new Direction(direction.getNSDir(), direction.getWEDir(), direction.getDUDir()), new Point3D(position.x, position.y, position.z));
 		copyPlane.setAlive(alive);
 		return copyPlane;
+	}
+	
+	// Returns a string representing its status.
+	public String getAsString() {
+		if (!alive) {
+			return "dead";
+		}
+		return "x: " + Integer.toString(position.x) + "y: " + Integer.toString(position.y) + " z: " + Integer.toString(position.z) +
+				" direction: " + direction.getAsString() + " cool down: " + Integer.toString(coolDown);
 	}
 }
