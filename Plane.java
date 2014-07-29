@@ -81,7 +81,7 @@ public class Plane {
 	    if (alive) {
 	        return direction.getPossibleDirections();
 	    } else {
-	        return null;
+	        return new Direction[0];
 	    }        
 	}
 
@@ -176,7 +176,7 @@ public class Plane {
 		copyPlane.setAlive(alive);
 		return copyPlane;
 	}
-	
+
 	// Returns a string representing its status.
 	public String getAsString() {
 		if (!alive) {
