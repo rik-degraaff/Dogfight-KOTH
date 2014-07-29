@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class Controller {
 
-	private static final int ARENA_SIZE = 20;
+	private static final int ARENA_SIZE = 14;
 	private static final int ROUNDS = 100;
 	private static final int FIGHTS = 10;
 	private static final int COOLDOWN = 1;
