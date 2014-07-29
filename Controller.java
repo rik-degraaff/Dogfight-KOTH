@@ -12,6 +12,7 @@ public class Controller {
 
 	public static void main(String []args){
 		
+		// This is a mock tournament between three DumbPlanes, replace these to test your own entries.
 		PlaneControl[] entries = {new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS)}; // Instances of all entries!!!
 		String[] names = {"DumbPlanes1", "DumbPlanes2", "DumbPlanes3"}; // corresponding names of all entries!!!
 		int[] scores = new int[entries.length];
@@ -28,7 +29,7 @@ public class Controller {
 			
 			out.println(eol + "----------------------------------------------------------------------------------------------------------------------------------------------------------------" + eol);
 		
-			//fight(new DumbPlanes(ARENA_SIZE, ROUNDS), "player1", new DumbPlanes(ARENA_SIZE, ROUNDS), "player2", out); // Use this to simulate a quick matchup between two planes.
+			//matchUp(new DumbPlanes(ARENA_SIZE, ROUNDS), "player1", new DumbPlanes(ARENA_SIZE, ROUNDS), "player2", out); // Use this to simulate a quick matchup between two planes.
 			for (int i=0; i<entries.length - 1; i++) {
 				for (int j=i+1; j<entries.length; j++) {
 					int winner = matchUp(entries[i], names[i], entries[j], names[j], out);
