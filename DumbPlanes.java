@@ -9,7 +9,7 @@ public class DumbPlanes extends PlaneControl {
 	@Override
 	public Move[] act() {
 		Move[] moves = new Move[2];
-		for (int i =0; i<2; i++) {
+		for (int i=0; i<2; i++) {
 			if (!myPlanes[i].isAlive()) {
 				moves[i] = new Move(new Direction("N"), false, false); // If we're dead we just return something, it doesn't matter anyway.
 				continue;
