@@ -182,7 +182,7 @@ public class Plane {
 		if (!alive) {
 			return "dead";
 		}
-		return "x: " + Integer.toString(position.x) + "y: " + Integer.toString(position.y) + " z: " + Integer.toString(position.z) +
+		return "x: " + Integer.toString(position.x) + " y: " + Integer.toString(position.y) + " z: " + Integer.toString(position.z) +
 				" direction: " + direction.getAsString() + " cool down: " + Integer.toString(coolDown);
 	}
 }
