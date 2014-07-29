@@ -14,26 +14,55 @@ public class Controller {
 		try {
 			PrintWriter out = new PrintWriter("test.txt");
 		
-		fight(new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS), out);
-		out.close();
+			//fight(new DumbPlanes(ARENA_SIZE, ROUNDS), "player1", new DumbPlanes(ARENA_SIZE, ROUNDS), "player2", out);
+			matchUp(new DumbPlanes(ARENA_SIZE, ROUNDS), "player1", new DumbPlanes(ARENA_SIZE, ROUNDS), "player2", out);
+			out.close();
 		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
     }
-
-	private static int fight(PlaneControl player1, PlaneControl player2, PrintWriter out) {
+	
+	// 0 means draw, 1 means player one won, -1 means player2 won.
+	private static int matchUp(PlaneControl player1, String player1String, PlaneControl player2, String player2String, PrintWriter out) {
+		int player1Score = 0;
+		int player2Score = 0;
+		
+		String eol = System.getProperty("line.separator");
+		
+		out.println("The match between " + player1String + " and " + player2String + " begins and will go on for " + FIGHTS + " fights." + eol);
+		
+		for (int i=0; i<FIGHTS; i++) {
+			out.println(eol + "FIGHT " + Integer.toString(i + 1) + eol);
+			
+			int winner = fight(player1, player1String, player2, player2String, out);
+			player1Score += (winner==1)?1:0;
+			player2Score += (winner==-1)?1:0;
+			
+			out.println("SCORE: " + player1String + ": " + Integer.toString(player1Score) + " " + player2String + ": " + Integer.toString(player2Score) + eol);
+		}
+		
+		if (player1Score - player2Score > 1) {
+			out.println(player1String + " WINS!!!" + eol);
+		} else if (player1Score - player2Score > 1) {
+			out.println(player2String + " WINS!!!" + eol);
+		} else {
+			out.println("IT'S A DRAW!" + eol);
+		}
+		
+		return Math.abs(player1Score - player2Score);
+	}
+	
+	// 0 means draw, 1 means player one won, -1 means player2 won. 
+	private static int fight(PlaneControl player1, String player1String, PlaneControl player2, String player2String, PrintWriter out) {
 
 		Plane[] player1Planes = {new Plane(ARENA_SIZE, 0, new Direction("S"), 0, ARENA_SIZE/2 - 2, 0),
 								new Plane(ARENA_SIZE, 0, new Direction("S"), 0, ARENA_SIZE/2 + 1, 0)};
 		Plane[] player2Planes = {new Plane(ARENA_SIZE, 0, new Direction("N"), ARENA_SIZE - 1, ARENA_SIZE/2 + 1, ARENA_SIZE - 1),
 								new Plane(ARENA_SIZE, 0, new Direction("N"), ARENA_SIZE - 1, ARENA_SIZE/2 - 2, ARENA_SIZE - 1)};
-
-		String player1String = "DumbPlanes1";
-		String player2String = "DumbPlanes2";
 		
 		String eol = System.getProperty("line.separator");
-		out.println("The match between " + player1String + " and " + player2String + " begins and will go on for " + ROUNDS + " rounds." + eol);
+		out.println("The fight between " + player1String + " and " + player2String + " begins and will go on for " + ROUNDS + " rounds." + eol);
 		
 		for (int i=ROUNDS - 1; i>=0; i--) {
 			// Announce the round.
