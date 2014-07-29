@@ -16,9 +16,14 @@ public class Direction {
 	public Direction(String direction) {
 		NS = (direction.indexOf("N")>-1)?-1:(direction.indexOf("S")>-1)?1:0;
 		WE = (direction.indexOf("W")>-1)?-1:(direction.indexOf("E")>-1)?1:0;
-		DU = (direction.indexOf("D")>-1)?-1:(direction.indexOf("S")>-1)?1:0;
+		DU = (direction.indexOf("D")>-1)?-1:(direction.indexOf("U")>-1)?1:0;
 	}
-
+	
+	// Returns this direction as a String.
+	public String getAsString() {
+		return String.valueOf(getMainDirections());
+	}
+	
 	// Returns The direction projected onto the NS-axis.
 	// -1 means heading north.
 	public int getNSDir() {
@@ -41,7 +46,7 @@ public class Direction {
 	public Point3D getAsPoint3D() {
 		return new Point3D(NS, WE, DU);
 	}
-	
+
 	// Returns an array of chars representing the main directions.
 	public char[] getMainDirections() {
 		char[] directions = new char[Math.abs(NS) + Math.abs(WE) + Math.abs(DU)];
@@ -51,17 +56,17 @@ public class Direction {
 			directions[count] = (NS==-1)?'N':'S';
 			count++;
 		}
-		
+
 		if (WE!=0) {
 			directions[count] = (WE==-1)?'W':'E';
 			count++;
 		}
-		
+
 		if (DU!=0) {
 			directions[count] = (DU==-1)?'D':'U';
 
 		}
-		
+
 		return directions;
 	}
 
@@ -76,8 +81,8 @@ public class Direction {
 		int directionCount = 0;
 
 		for (int tempNS = -1; tempNS<=1; tempNS++) {
-			for (int tempWE = -1; tempNS<=1; tempNS++) {
-				for (int tempDU = -1; tempNS<=1; tempNS++) {
+			for (int tempWE = -1; tempWE<=1; tempWE++) {
+				for (int tempDU = -1; tempDU<=1; tempDU++) {
 					Direction tempDirection = new Direction(tempNS,tempWE, tempDU);
 					if (isValidDirection(tempDirection)) {
 						directions[directionCount] = tempDirection;
@@ -89,7 +94,7 @@ public class Direction {
 
 		return directions;
 	}
-	
+
 	// Returns true if a direction is a valid direction to change to
 	public boolean isValidDirection(Direction direction) {
 		return (((direction.getNSDir() - NS)*(direction.getNSDir() - NS) + (direction.getWEDir() - WE)*(direction.getWEDir() - WE) + (direction.getDUDir() - DU)*(direction.getDUDir() - DU)) < 3 &&
