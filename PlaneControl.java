@@ -16,7 +16,7 @@ public abstract class PlaneControl {
 		roundsLeft = rounds;
 	}
 
-	public final void setRoundsLeft(int rounds) {
+	public void setRoundsLeft(int rounds) {
 		roundsLeft = rounds;
 	}
 
