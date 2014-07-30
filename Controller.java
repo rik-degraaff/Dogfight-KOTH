@@ -286,7 +286,7 @@ public class Controller {
 				Point3D[] range = planes[i].getShootRange();
 				for (int j=0; j<range.length; j++) {
 					for (int k=0; k<planes.length; k++) {
-						if (range[j].equals(planes[k].getPosition())) {
+						if (planes[k].isAlive() && range[j].equals(planes[k].getPosition())) {
 							hit[k] = true;
 							out.println("Someone got shot!!!!" + eol);
 							break;
