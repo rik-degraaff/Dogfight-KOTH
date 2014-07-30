@@ -69,11 +69,7 @@ public class Plane {
 
 	// Returns the direction of the plane.
 	public Direction getDirection() {
-	    if (alive) {
-	        return direction;
-	    } else {
-	        return null;
-	    }
+	    return direction;
 	}
 
 	// Returns all possible turning directions for the plane.
