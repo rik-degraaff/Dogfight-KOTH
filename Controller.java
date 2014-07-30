@@ -14,7 +14,7 @@ public class Controller {
 
 		// This is a mock tournament between three DumbPlanes, replace these to test your own entries.
 		PlaneControl[] entries = {new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS)}; // Instances of all entries!!!
-		String[] names = {"DumbPlanes1", "DumbPlanes2", "DumbPlanes3"}; // corresponding names of all entries!!!
+
 		int[] scores = new int[entries.length];
 
 		for (int i=0; i<scores.length; i++) {
@@ -32,7 +32,7 @@ public class Controller {
 			//matchUp(new DumbPlanes(ARENA_SIZE, ROUNDS), "player1", new DumbPlanes(ARENA_SIZE, ROUNDS), "player2", out); // Use this to simulate a quick matchup between two planes.
 			for (int i=0; i<entries.length - 1; i++) {
 				for (int j=i+1; j<entries.length; j++) {
-					int winner = matchUp(entries[i], names[i], entries[j], names[j], out);
+					int winner = matchUp(entries[i], entries[i].getClass().getSimpleName(), entries[j], entries[j].getClass().getSimpleName(), out);
 					out.println(eol + "----------------------------------------------------------------------------------------------------------------------------------------------------------------" + eol);
 					scores[i] += (winner==1)?2:(winner==-1)?0:1;
 					scores[j] += (winner==-1)?2:(winner==1)?0:1;
@@ -46,13 +46,13 @@ public class Controller {
 
 			for (int i=0; i<scores.length; i++) {
 				if (((scores[i] == topScore) && (topScorer == "")) || (scores[i] > topScore)) {
-					topScorer = names[i];
+					topScorer = entries[i].getClass().getSimpleName();
 					topScore = scores[i];
 				} else if (scores[i] == topScore) {
-					topScorer = topScorer + " and " + names[i];
+					topScorer = topScorer + " and " + entries[i].getClass().getSimpleName();
 				}
 
-				out.println(names[i] + ": " + scores[i] + " points.");
+				out.println(entries[i].getClass().getSimpleName() + ": " + scores[i] + " points.");
 			}
 
 			out.println(eol + eol + "THE OVERALL WINNER(S): " + topScorer + eol + "With " + Integer.toString(topScore) + " points.");
