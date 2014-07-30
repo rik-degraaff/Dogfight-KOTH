@@ -136,6 +136,7 @@ public class Plane {
 
 	// Returns a plane that represents this plane after making a certain move,
 	// not taking into account other planes.
+	// Doesn't update cool down, see updateCoolDown() for that.
 	public Plane simulateMove(Move move) {
 		if (!alive) {
 			return copy();
@@ -152,8 +153,13 @@ public class Plane {
 		} else {
 			newDirection = direction;
 		}
-
-		return new Plane(arenaSize, Math.max(0, coolDown - 1), newDirection, position.add(move.direction.getAsPoint3D()));
+		
+		return new Plane(arenaSize, coolDown, newDirection, position.add(move.direction.getAsPoint3D()));
+	}
+	
+	// modifies this plane's cool down
+	public void updateCoolDown(boolean shot) {
+		coolDown = (shot && canShoot())?Controller.COOLDOWN:Math.max(0, coolDown - 1);
 	}
 
 	// Returns true if the plane is alive.
