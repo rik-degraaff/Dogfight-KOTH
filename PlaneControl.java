@@ -36,6 +36,11 @@ public abstract class PlaneControl {
 		enemyPlanes[1] = plane;
 	}
 
+	// called at the end of a tournament
+	public void close() {
+		//
+	}
+
 	// Notifies you that a new fight is starting
 	// FightsFought tells you how many fights will be fought.
 	// the scores tell you how many fights each player has won.

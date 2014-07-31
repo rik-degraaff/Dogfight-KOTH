@@ -58,6 +58,9 @@ public class Controller {
 			out.println(eol + eol + "THE OVERALL WINNER(S): " + topScorer + eol + "With " + Integer.toString(topScore) + " points.");
 
 			out.close();
+			for(PlaneControl pc : entries) {
+				pc.close();
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

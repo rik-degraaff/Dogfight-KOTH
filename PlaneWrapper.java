@@ -42,6 +42,12 @@ public class PlaneWrapper extends PlaneControl {
     }
 
     @Override
+    public void close() {
+        System.err.println("wrapper being closed");
+        this.process.destroy();
+    }
+
+    @Override
     public final void setRoundsLeft(int rounds) {
         try{
             writer.write(("ROUNDS LEFT " + Integer.toString(rounds) + "\n"));
