@@ -16,7 +16,7 @@ public abstract class PlaneControl {
 		roundsLeft = rounds;
 	}
 
-	public final void setRoundsLeft(int rounds) {
+	public void setRoundsLeft(int rounds) {
 		roundsLeft = rounds;
 	}
 
@@ -34,6 +34,11 @@ public abstract class PlaneControl {
 
 	public final void setEnemyPlane2(Plane plane) {
 		enemyPlanes[1] = plane;
+	}
+
+	// called at the end of a tournament
+	public void close() {
+		//
 	}
 
 	// Notifies you that a new fight is starting

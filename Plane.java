@@ -187,4 +187,18 @@ public class Plane {
 		return "x: " + Integer.toString(position.x) + " y: " + Integer.toString(position.y) + " z: " + Integer.toString(position.z) +
 				" direction: " + direction.getAsString() + " cool down: " + Integer.toString(coolDown);
 	}
+
+	// Returns a string suitable for passing to a wrapped plane process
+	public String getDataString() {
+		if (!alive) {
+			return "dead 0 0 0 N 0";
+		}
+		return 
+			"alive " + 
+			Integer.toString(position.x) + " " + 
+			Integer.toString(position.y) + " " + 
+			Integer.toString(position.z) + " " +
+			direction.getAsString() + " " + 
+			Integer.toString(coolDown);
+	}
 }
