@@ -14,7 +14,7 @@ public class Controller {
 		
 		// This is a mock tournament between three DumbPlanes, replace these to test your own entries.
 		PlaneControl[] entries = {new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS), new DumbPlanes(ARENA_SIZE, ROUNDS)}; // Instances of all entries!!!
-	String[] names = {"DumbPlanes1", "DumbPlanes2", "DumbPlanes3"}; // The respective names of all entries!!!
+		String[] names = {"DumbPlanes1", "DumbPlanes2", "DumbPlanes3"}; // The respective names of all entries!!!
 		
 		int[] scores = new int[entries.length];
 
