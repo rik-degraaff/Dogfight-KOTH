@@ -42,7 +42,7 @@ public class Plane {
 	}
 
 	// Returns the distance between the plane and the specified wall,
-	// 0 means right next to it, 19 means at the opposite side.
+	// 0 means right next to it, (arenaSize - 1) means at the opposite side.
 	// Returns -1 for invalid input.
 	public int getDistanceFromWall(char wall) {
 	    if (alive) {
@@ -99,7 +99,7 @@ public class Plane {
 	// Returns all positions this plane can shoot at (without first making a move).
 	public Point3D[] getShootRange() {		
 		if (alive) {
-			int maxDistance = 20;
+			int maxDistance = arenasize;
 
 			for (int i=0; i<direction.getMainDirections().length; i++) {
 				maxDistance = Math.min(maxDistance, getDistanceFromWall(direction.getMainDirections()[i]));
@@ -200,5 +200,15 @@ public class Plane {
 			Integer.toString(position.z) + " " +
 			direction.getAsString() + " " + 
 			Integer.toString(coolDown);
+	}
+	
+	// Returns true if a plane is on an irreversable colision course with the wall.
+	// Use this along with simulateMove() to avoid hitting walls or prune possible emeny moves.
+	public boolean isSuicidal() {
+		char[] directions = direction.getMainDirections;
+		if(directions.length = 3) {
+			return getDistanceFromWall(directions[0])<2 && getDistanceFromWall(directions[1])<2 && getDistanceFromWall(directions[2])<2;
+		}
+		return getDistanceFromWall(directions[0])<1 && (directions.length = 1 ¦¦ getDistanceFromWall(directions[1])<1)
 	}
 }
