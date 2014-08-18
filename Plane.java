@@ -209,6 +209,6 @@ public class Plane {
 		if(directions.length = 3) {
 			return getDistanceFromWall(directions[0])<2 && getDistanceFromWall(directions[1])<2 && getDistanceFromWall(directions[2])<2;
 		}
-		return getDistanceFromWall(directions[0])<1 && (directions.length = 1 ¦¦ getDistanceFromWall(directions[1])<1)
+		return getDistanceFromWall(directions[0])<1 && (directions.length = 1 || getDistanceFromWall(directions[1])<1);
 	}
 }
