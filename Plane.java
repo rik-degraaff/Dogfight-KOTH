@@ -99,7 +99,7 @@ public class Plane {
 	// Returns all positions this plane can shoot at (without first making a move).
 	public Point3D[] getShootRange() {		
 		if (alive) {
-			int maxDistance = arenasize;
+			int maxDistance = arenaSize;
 
 			for (int i=0; i<direction.getMainDirections().length; i++) {
 				maxDistance = Math.min(maxDistance, getDistanceFromWall(direction.getMainDirections()[i]));
@@ -205,10 +205,10 @@ public class Plane {
 	// Returns true if a plane is on an irreversable colision course with the wall.
 	// Use this along with simulateMove() to avoid hitting walls or prune possible emeny moves.
 	public boolean isSuicidal() {
-		char[] directions = direction.getMainDirections;
-		if(directions.length = 3) {
+		char[] directions = direction.getMainDirections();
+		if(directions.length == 3) {
 			return getDistanceFromWall(directions[0])<2 && getDistanceFromWall(directions[1])<2 && getDistanceFromWall(directions[2])<2;
 		}
-		return getDistanceFromWall(directions[0])<1 && (directions.length = 1 || getDistanceFromWall(directions[1])<1);
+		return getDistanceFromWall(directions[0])<1 && (directions.length == 1 || getDistanceFromWall(directions[1])<1);
 	}
 }
